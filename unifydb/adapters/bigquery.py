@@ -14,12 +14,12 @@ class BigQuery(BaseAdapter):
     Google BigQuery adapter.
     
     Install:
-        pip install unifydb[bigquery]
+        pip install onedb[bigquery]
     """
     
     db_type = DatabaseType.BIGQUERY
     driver_name = "google-cloud-bigquery"
-    install_command = "pip install unifydb[bigquery]"
+    install_command = "pip install onedb[bigquery]"
     
     def __init__(self, config: Optional[ConnectionConfig] = None, **kwargs):
         super().__init__(config, **kwargs)
