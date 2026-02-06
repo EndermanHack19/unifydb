@@ -9,7 +9,7 @@ Usage:
     db = Database.connect("postgresql://user:pass@localhost/mydb")
     
     # Or use specific adapter
-    from unifydb.adapters import PostgreSQL
+    from unifydb import PostgreSQL
     db = PostgreSQL(host="localhost", database="mydb")
 
 Install options:
@@ -21,13 +21,15 @@ Install options:
 """
 
 __version__ = "1.0.0"
-__author__ = "Your Name"
+__author__ = "EndermanHack19"
 __license__ = "MIT"
 
-from .core.manager import Database, DatabaseManager
-from .core.base import BaseAdapter, ConnectionConfig
+# Core imports
+from .core.base import BaseAdapter, ConnectionConfig, QueryResult, DatabaseType
 from .core.query_builder import Query, QueryBuilder
-from .core.connection import ConnectionPool
+from .core.manager import Database, DatabaseManager
+
+# Exceptions
 from .exceptions import (
     UnifyDBError,
     ConnectionError,
@@ -36,7 +38,13 @@ from .exceptions import (
     DriverNotInstalledError,
 )
 
-# Lazy loading of adapters
+# Optional: Connection pool (may not be needed for basic usage)
+try:
+    from .core.connection import ConnectionPool
+except ImportError:
+    ConnectionPool = None
+
+
 def __getattr__(name: str):
     """Lazy import adapters."""
     adapters = {
@@ -59,24 +67,34 @@ def __getattr__(name: str):
     
     if name in adapters:
         import importlib
-        module = importlib.import_module(adapters[name], package='unifydb')
-        return getattr(module, name)
+        try:
+            module = importlib.import_module(adapters[name], package='unifydb')
+            return getattr(module, name)
+        except ImportError as e:
+            raise ImportError(
+                f"Adapter '{name}' requires additional dependencies. "
+                f"Install with: pip install unifydb[{name.lower()}]"
+            ) from e
     
     raise AttributeError(f"module 'unifydb' has no attribute '{name}'")
 
 
 __all__ = [
+    # Version
+    "__version__",
     # Core
     "Database",
-    "DatabaseManager",
+    "DatabaseManager", 
     "BaseAdapter",
     "ConnectionConfig",
+    "QueryResult",
+    "DatabaseType",
     "Query",
     "QueryBuilder",
     "ConnectionPool",
     # Exceptions
     "UnifyDBError",
-    "ConnectionError", 
+    "ConnectionError",
     "QueryError",
     "AdapterNotFoundError",
     "DriverNotInstalledError",
