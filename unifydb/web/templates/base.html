@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}UnifyDB Dashboard{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: #0f172a;
+            color: #e2e8f0;
+            min-height: 100vh;
+        }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
+        .header {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 { font-size: 1.5rem; color: #38bdf8; }
+        .nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin-left: 20px;
+            transition: color 0.2s;
+        }
+        .nav a:hover { color: #38bdf8; }
+        .card {
+            background: #1e293b;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+        .card-title {
+            font-size: 1.1rem;
+            color: #f1f5f9;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #334155;
+        }
+        th { color: #94a3b8; font-weight: 500; }
+        tr:hover { background: #334155; }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .btn:hover { background: #2563eb; }
+        .btn-success { background: #22c55e; }
+        .btn-danger { background: #ef4444; }
+        textarea {
+            width: 100%;
+            background: #0f172a;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', monospace;
+            font-size: 14px;
+            resize: vertical;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .badge-green { background: #166534; color: #86efac; }
+        .badge-blue { background: #1e40af; color: #93c5fd; }
+        .badge-purple { background: #581c87; color: #d8b4fe; }
+        .flash { padding: 15px; border-radius: 8px; margin-bottom: 20px; }
+        .flash-error { background: #7f1d1d; color: #fecaca; }
+        .flash-success { background: #166534; color: #bbf7d0; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>🗄️ UnifyDB Dashboard</h1>
+            <nav class="nav">
+                <a href="{{ url_for('index') }}">Home</a>
+                <a href="https://github.com/yourusername/unifydb" target="_blank">GitHub</a>
+                <a href="https://unifydb.readthedocs.io" target="_blank">Docs</a>
+            </nav>
+        </header>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <div class="flash flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+        
+        {% block content %}{% endblock %}
+    </div>
+    
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
