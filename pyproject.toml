@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "unifydb"
-version = "1.0.1"
-description = "One library to rule them all databases. Unified interface for 15+ database systems."
+name = "onedb"
+version = "1.0.0"
+description = "One library to rule them all databases. Unified Python interface for 15+ database systems."
 readme = "README.md"
 license = {text = "MIT"}
 authors = [
@@ -14,12 +14,14 @@ authors = [
 keywords = [
     "database", "sql", "nosql", "orm", "postgresql", "mysql", 
     "mongodb", "redis", "oracle", "sqlite", "elasticsearch",
-    "cassandra", "dynamodb", "snowflake", "bigquery", "neo4j"
+    "cassandra", "dynamodb", "snowflake", "bigquery", "neo4j",
+    "unified", "multi-database", "database-adapter"
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
@@ -28,6 +30,7 @@ classifiers = [
     "Programming Language :: Python :: 3.13",
     "Topic :: Database",
     "Topic :: Software Development :: Libraries :: Python Modules",
+    "Typing :: Typed",
 ]
 requires-python = ">=3.9"
 dependencies = []
@@ -35,16 +38,16 @@ dependencies = []
 [project.optional-dependencies]
 # Individual database drivers
 oracle = ["oracledb>=1.0.0"]
-mysql = ["mysql-connector-python>=8.0.0", "PyMySQL>=1.0.0"]
-mssql = ["pyodbc>=4.0.0", "pymssql>=2.2.0"]
+mysql = ["PyMySQL>=1.0.0"]
+mssql = ["pymssql>=2.2.0"]
 postgresql = ["psycopg2-binary>=2.9.0"]
 mongodb = ["pymongo>=4.0.0"]
-sqlite = []  # Built-in
+sqlite = []
 redis = ["redis>=4.0.0"]
 db2 = ["ibm_db>=3.0.0"]
 elasticsearch = ["elasticsearch>=8.0.0"]
 cassandra = ["cassandra-driver>=3.25.0"]
-mariadb = ["mariadb>=1.1.0", "PyMySQL>=1.0.0"]
+mariadb = ["PyMySQL>=1.0.0"]
 dynamodb = ["boto3>=1.26.0"]
 snowflake = ["snowflake-connector-python>=3.0.0"]
 bigquery = ["google-cloud-bigquery>=3.0.0"]
@@ -52,26 +55,24 @@ neo4j = ["neo4j>=5.0.0"]
 
 # All databases
 all = [
-    "unifydb[oracle]",
-    "unifydb[mysql]",
-    "unifydb[mssql]",
-    "unifydb[postgresql]",
-    "unifydb[mongodb]",
-    "unifydb[redis]",
-    "unifydb[db2]",
-    "unifydb[elasticsearch]",
-    "unifydb[cassandra]",
-    "unifydb[mariadb]",
-    "unifydb[dynamodb]",
-    "unifydb[snowflake]",
-    "unifydb[bigquery]",
-    "unifydb[neo4j]",
+    "onedb[oracle]",
+    "onedb[mysql]",
+    "onedb[mssql]",
+    "onedb[postgresql]",
+    "onedb[mongodb]",
+    "onedb[redis]",
+    "onedb[db2]",
+    "onedb[elasticsearch]",
+    "onedb[cassandra]",
+    "onedb[dynamodb]",
+    "onedb[snowflake]",
+    "onedb[bigquery]",
+    "onedb[neo4j]",
 ]
 
 # Development
 dev = [
     "pytest>=7.0.0",
-    "pytest-asyncio>=0.21.0",
     "pytest-cov>=4.0.0",
     "black>=23.0.0",
     "mypy>=1.0.0",
@@ -79,20 +80,17 @@ dev = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/EndermanHack19/unifydb"
-Documentation = "https://github.com/EndermanHack19/unifydb#readme"
-Repository = "https://github.com/EndermanHack19/unifydb"
-Issues = "https://github.com/EndermanHack19/unifydb/issues"
-
-[project.scripts]
-unifydb = "unifydb.cli:main"
+Homepage = "https://github.com/EndermanHack19/onedb"
+Documentation = "https://github.com/EndermanHack19/onedb#readme"
+Repository = "https://github.com/EndermanHack19/onedb"
+Issues = "https://github.com/EndermanHack19/onedb/issues"
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["unifydb*"]
+include = ["onedb*"]
 
 [tool.setuptools.package-data]
-unifydb = ["py.typed"]
+onedb = ["py.typed"]
 
 [tool.black]
 line-length = 88
