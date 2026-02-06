@@ -20,7 +20,7 @@ Install options:
     pip install unifydb[all]               # All database drivers
 """
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __author__ = "EndermanHack19"
 __license__ = "MIT"
 
