@@ -1,26 +1,4 @@
-"""
-UnifyDB - One library to rule them all databases.
-Unified interface for 15+ database systems.
-
-Usage:
-    from unifydb import Database
-    
-    # Connect to any database
-    db = Database.connect("postgresql://user:pass@localhost/mydb")
-    
-    # Or use specific adapter
-    from unifydb import PostgreSQL
-    db = PostgreSQL(host="localhost", database="mydb")
-
-Install options:
-    pip install unifydb                    # Core only
-    pip install unifydb[postgresql]        # With PostgreSQL support
-    pip install unifydb[mysql]             # With MySQL support
-    pip install unifydb[mongodb]           # With MongoDB support
-    pip install unifydb[all]               # All database drivers
-"""
-
-__version__ = "1.0.1"
+__version__ = "1.0.0"
 __author__ = "EndermanHack19"
 __license__ = "MIT"
 
@@ -70,15 +48,15 @@ def __getattr__(name: str):
     if name in adapters:
         import importlib
         try:
-            module = importlib.import_module(adapters[name], package='unifydb')
+            module = importlib.import_module(adapters[name], package='onedb')
             return getattr(module, name)
         except ImportError as e:
             raise ImportError(
                 f"Adapter '{name}' requires additional dependencies. "
-                f"Install with: pip install unifydb[{name.lower()}]"
+                f"Install with: pip install onedb[{name.lower()}]"
             ) from e
     
-    raise AttributeError(f"module 'unifydb' has no attribute '{name}'")
+    raise AttributeError(f"module 'onedb' has no attribute '{name}'")
 
 
 __all__ = [
