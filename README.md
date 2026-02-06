@@ -4,21 +4,17 @@
 
 ### One Library to Rule Them All Databases
 
-**Unified Python interface for 15+ database systems with optional web dashboard**
+**Unified Python interface for 15+ database systems**
 
 [![PyPI version](https://img.shields.io/pypi/v/unifydb?color=blue&label=PyPI)](https://pypi.org/project/unifydb/)
 [![Python](https://img.shields.io/pypi/pyversions/unifydb?color=green)](https://python.org)
 [![Downloads](https://img.shields.io/pypi/dm/unifydb?color=orange)](https://pypi.org/project/unifydb/)
 [![License](https://img.shields.io/badge/license-MIT-purple)](LICENSE)
-[![Tests](https://img.shields.io/badge/tests-passing-brightgreen)](tests/)
-[![Documentation](https://img.shields.io/badge/docs-available-brightgreen)](https://docs.unifydb.org)
 
 [Installation](#-installation) •
 [Quick Start](#-quick-start) •
 [Examples](#-examples) •
-[Web Panel](#-web-panel) •
-[API Reference](#-api-reference) •
-[FAQ](#-faq)
+[API Reference](#-api-reference)
 
 </div>
 
@@ -48,7 +44,6 @@ db.insert("users", {"name": "John"})       # Same for all databases!
 | 🔌 **15+ Databases** | SQL, NoSQL, Graph, TimeSeries - all in one |
 | 🎯 **Unified API** | Learn once - use everywhere |
 | 📦 **Modular** | Install only needed database drivers |
-| 🌐 **Web Dashboard** | Visual management for all databases |
 | ⚡ **Async Support** | For high-performance applications |
 | 🛡️ **Type Hints** | Full type hints support |
 | 🔄 **Query Builder** | Programmatic query construction |
@@ -81,9 +76,6 @@ pip install unifydb[postgresql,mongodb,redis]
 
 # All databases
 pip install unifydb[all]
-
-# Everything
-pip install unifydb[full]
 ```
 
 ### Installation Table
@@ -858,16 +850,6 @@ async def main():
 asyncio.run(main())
 ```
 
-### Web Panel Features
-
-- 📊 **Dashboard** - Overview of all connections
-- 📋 **Tables** - Browse tables/collections
-- 🔍 **Query** - SQL/NoSQL editor with syntax highlighting
-- 📈 **Stats** - Statistics and metrics
-- 🔒 **Read-only mode** - Safe view-only access
-- 📤 **Export** - Export data to CSV, JSON
-- 🔄 **Real-time** - Live updates for some databases
-
 ---
 
 ## 📖 API Reference
@@ -1102,29 +1084,11 @@ db = PostgreSQL(
 ### Development Setup
 
 ```bash
-git clone https://github.com/yourusername/unifydb
+git clone https://github.com/EndermanHack19/unifydb
 cd unifydb
 pip install -e ".[dev]"
 pytest tests/
 ```
-
----
-
-## 📜 Changelog
-
-### v1.0.0 (2024-01-15)
-- 🎉 First stable release
-- ✅ 15 supported databases
-- ✅ Web Dashboard
-- ✅ Query Builder
-- ✅ Async support
-- ✅ Comprehensive documentation
-
----
-
-## 📄 License
-
-MIT License — free to use for both personal and commercial projects.
 
 ---
 
@@ -1135,4 +1099,3 @@ MIT License — free to use for both personal and commercial projects.
 [⬆ Back to Top](#-unifydb)
 
 </div>
-```
