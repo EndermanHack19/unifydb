@@ -79,11 +79,8 @@ pip install unifydb[sqlite]      # Already built-in with Python!
 # Multiple databases
 pip install unifydb[postgresql,mongodb,redis]
 
-# All databases (without web panel)
+# All databases
 pip install unifydb[all]
-
-# 🌐 Web Panel (installed SEPARATELY)
-pip install unifydb[web]
 
 # Everything
 pip install unifydb[full]
@@ -859,80 +856,6 @@ async def main():
 
 # Run
 asyncio.run(main())
-```
-
----
-
-## 🌐 Web Panel
-
-### Installation
-
-```bash
-# Web panel is installed SEPARATELY from [all]
-pip install unifydb[web]
-```
-
-### Quick Start
-
-```python
-from unifydb import Database
-from unifydb.web import run_server
-
-# Start with auto-configuration
-run_server(port=5000)
-```
-
-### Advanced Configuration
-
-```python
-from unifydb import Database, DatabaseManager
-from unifydb.web import create_app
-
-# Create Flask application
-app = create_app()
-
-# Configure connections
-manager = DatabaseManager()
-manager.add("production", "postgresql://prod.server/maindb")
-manager.add("staging", "postgresql://staging.server/maindb")
-manager.add("cache", "redis://cache.server:6379/0")
-manager.add("analytics", "mongodb://analytics.server/data")
-
-# Pass to application
-app.config["UNIFYDB_CONNECTIONS"] = manager._connections
-
-# Additional settings
-app.config["SECRET_KEY"] = "your-secret-key"
-app.config["UNIFYDB_READONLY"] = True  # Read-only mode
-
-# Run
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=False)
-```
-
-### Integration with Existing Flask App
-
-```python
-from flask import Flask
-from unifydb import Database
-from unifydb.web import create_app as create_unifydb_app
-
-# Your main application
-app = Flask(__name__)
-
-@app.route("/")
-def index():
-    return "Main Application"
-
-# Mount UnifyDB panel
-unifydb_app = create_unifydb_app()
-unifydb_app.config["UNIFYDB_CONNECTIONS"] = {
-    "main": Database.connect("postgresql://localhost/mydb")
-}
-
-app.register_blueprint(unifydb_app, url_prefix="/admin/db")
-
-# Now panel available at /admin/db/
 ```
 
 ### Web Panel Features
