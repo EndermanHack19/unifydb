@@ -14,12 +14,12 @@ class DB2(BaseAdapter):
     IBM Db2 database adapter.
     
     Install:
-        pip install unifydb[db2]
+        pip install onedb[db2]
     """
     
     db_type = DatabaseType.DB2
     driver_name = "ibm_db"
-    install_command = "pip install unifydb[db2]"
+    install_command = "pip install onedb[db2]"
     
     def __init__(self, config: Optional[ConnectionConfig] = None, **kwargs):
         super().__init__(config, **kwargs)
