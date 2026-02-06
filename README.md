@@ -1,14 +1,14 @@
 <div align="center">
 
-# 🗄️ UnifyDB
+# 🗄️ OneDB
 
 ### One Library to Rule Them All Databases
 
 **Unified Python interface for 15+ database systems**
 
-[![PyPI version](https://img.shields.io/pypi/v/unifydb?color=blue&label=PyPI)](https://pypi.org/project/unifydb/)
-[![Python](https://img.shields.io/pypi/pyversions/unifydb?color=green)](https://python.org)
-[![Downloads](https://img.shields.io/pypi/dm/unifydb?color=orange)](https://pypi.org/project/unifydb/)
+[![PyPI version](https://img.shields.io/pypi/v/onedb?color=blue&label=PyPI)](https://pypi.org/project/onedb/)
+[![Python](https://img.shields.io/pypi/pyversions/onedb?color=green)](https://python.org)
+[![Downloads](https://img.shields.io/pypi/dm/onedb?color=orange)](https://pypi.org/project/onedb/)
 [![License](https://img.shields.io/badge/license-MIT-purple)](LICENSE)
 
 [Installation](#-installation) •
@@ -20,18 +20,18 @@
 
 ---
 
-## ✨ Why UnifyDB?
+## ✨ Why OneDB?
 
 ```python
-# ❌ Without UnifyDB - different syntax for each database
+# ❌ Without OneDB - different syntax for each database
 import psycopg2      # PostgreSQL
 import pymongo       # MongoDB  
 import redis         # Redis
 import cx_Oracle     # Oracle
 # ... and so on, each with its own API
 
-# ✅ With UnifyDB - unified interface
-from unifydb import Database
+# ✅ With OneDB - unified interface
+from onedb import Database
 
 db = Database.connect("postgresql://...")  # or mysql, mongodb, redis...
 db.insert("users", {"name": "John"})       # Same for all databases!
@@ -58,45 +58,45 @@ db.insert("users", {"name": "John"})       # Same for all databases!
 
 ```bash
 # Core library (without database drivers)
-pip install unifydb
+pip install onedb
 ```
 
 ### Installation with Drivers
 
 ```bash
 # Single database
-pip install unifydb[postgresql]
-pip install unifydb[mysql]
-pip install unifydb[mongodb]
-pip install unifydb[redis]
-pip install unifydb[sqlite]      # Already built-in with Python!
+pip install onedb[postgresql]
+pip install onedb[mysql]
+pip install onedb[mongodb]
+pip install onedb[redis]
+pip install onedb[sqlite]      # Already built-in with Python!
 
 # Multiple databases
-pip install unifydb[postgresql,mongodb,redis]
+pip install onedb[postgresql,mongodb,redis]
 
 # All databases
-pip install unifydb[all]
+pip install onedb[all]
 ```
 
 ### Installation Table
 
 | Database | Command | Driver |
 |----------|---------|--------|
-| PostgreSQL | `pip install unifydb[postgresql]` | psycopg2, asyncpg |
-| MySQL | `pip install unifydb[mysql]` | mysql-connector, PyMySQL |
+| PostgreSQL | `pip install onedb[postgresql]` | psycopg2, asyncpg |
+| MySQL | `pip install onedb[mysql]` | mysql-connector, PyMySQL |
 | SQLite | Built-in | sqlite3 |
-| MongoDB | `pip install unifydb[mongodb]` | pymongo, motor |
-| Redis | `pip install unifydb[redis]` | redis-py |
-| MariaDB | `pip install unifydb[mariadb]` | mariadb |
-| MS SQL Server | `pip install unifydb[mssql]` | pyodbc, pymssql |
-| Oracle | `pip install unifydb[oracle]` | cx_Oracle, oracledb |
-| Elasticsearch | `pip install unifydb[elasticsearch]` | elasticsearch |
-| Cassandra | `pip install unifydb[cassandra]` | cassandra-driver |
-| DynamoDB | `pip install unifydb[dynamodb]` | boto3 |
-| Snowflake | `pip install unifydb[snowflake]` | snowflake-connector |
-| BigQuery | `pip install unifydb[bigquery]` | google-cloud-bigquery |
-| Neo4j | `pip install unifydb[neo4j]` | neo4j |
-| IBM Db2 | `pip install unifydb[db2]` | ibm_db |
+| MongoDB | `pip install onedb[mongodb]` | pymongo, motor |
+| Redis | `pip install onedb[redis]` | redis-py |
+| MariaDB | `pip install onedb[mariadb]` | mariadb |
+| MS SQL Server | `pip install onedb[mssql]` | pyodbc, pymssql |
+| Oracle | `pip install onedb[oracle]` | cx_Oracle, oracledb |
+| Elasticsearch | `pip install onedb[elasticsearch]` | elasticsearch |
+| Cassandra | `pip install onedb[cassandra]` | cassandra-driver |
+| DynamoDB | `pip install onedb[dynamodb]` | boto3 |
+| Snowflake | `pip install onedb[snowflake]` | snowflake-connector |
+| BigQuery | `pip install onedb[bigquery]` | google-cloud-bigquery |
+| Neo4j | `pip install onedb[neo4j]` | neo4j |
+| IBM Db2 | `pip install onedb[db2]` | ibm_db |
 
 ---
 
@@ -105,7 +105,7 @@ pip install unifydb[all]
 ### Database Connection
 
 ```python
-from unifydb import Database
+from onedb import Database
 
 # 🐘 PostgreSQL
 db = Database.connect("postgresql://user:password@localhost:5432/mydb")
@@ -133,7 +133,7 @@ db = Database.connect("oracle://user:password@localhost:1521/mydb")
 ### Alternative Connection Methods
 
 ```python
-from unifydb import Database, PostgreSQL, MongoDB
+from onedb import Database, PostgreSQL, MongoDB
 
 # Via parameters
 db = Database.connect(
@@ -159,7 +159,7 @@ db.connect()
 ### Context Manager (Recommended)
 
 ```python
-from unifydb import Database
+from onedb import Database
 
 # Automatic connection management
 with Database.connect("postgresql://localhost/mydb") as db:
@@ -177,7 +177,7 @@ with Database.connect("postgresql://localhost/mydb") as db:
 #### Create
 
 ```python
-from unifydb import Database
+from onedb import Database
 
 db = Database.connect("postgresql://localhost/mydb")
 
@@ -279,7 +279,7 @@ db.delete("temp_data")
 ### 🔹 Raw SQL Queries
 
 ```python
-from unifydb import Database
+from onedb import Database
 
 db = Database.connect("postgresql://localhost/mydb")
 
@@ -317,7 +317,7 @@ print(f"Execution time: {result.execution_time}ms")
 ### 🔹 Query Builder
 
 ```python
-from unifydb import Query, Operator
+from onedb import Query, Operator
 
 # Simple query
 query = Query("users").select("id", "name", "email")
@@ -394,7 +394,7 @@ mongo_filter, mongo_options = query.to_mongo()
 ### 🔹 Transactions
 
 ```python
-from unifydb import Database
+from onedb import Database
 
 db = Database.connect("postgresql://localhost/mydb")
 
@@ -452,7 +452,7 @@ except Exception as e:
 ### 🔹 Working with Multiple Databases
 
 ```python
-from unifydb import DatabaseManager, Database
+from onedb import DatabaseManager, Database
 
 # Create manager
 manager = DatabaseManager()
@@ -503,7 +503,7 @@ with DatabaseManager() as manager:
 #### 🐘 PostgreSQL
 
 ```python
-from unifydb import PostgreSQL
+from onedb import PostgreSQL
 
 db = PostgreSQL(
     host="localhost",
@@ -549,7 +549,7 @@ columns = db.get_columns("users")
 #### 🍃 MongoDB
 
 ```python
-from unifydb import MongoDB
+from onedb import MongoDB
 
 db = MongoDB(
     host="localhost",
@@ -601,7 +601,7 @@ count = db.count("users", where={"active": True})
 #### 🔴 Redis
 
 ```python
-from unifydb import Redis
+from onedb import Redis
 
 db = Redis(host="localhost", port=6379, database=0)
 db.connect()
@@ -664,7 +664,7 @@ print(f"Used memory: {info['used_memory_human']}")
 #### 📁 SQLite
 
 ```python
-from unifydb import SQLite
+from onedb import SQLite
 
 # File database
 db = SQLite(database="myapp.db")
@@ -699,7 +699,7 @@ if db.table_exists("notes"):
 #### 🔷 Elasticsearch
 
 ```python
-from unifydb import Elasticsearch
+from onedb import Elasticsearch
 
 db = Elasticsearch(host="localhost", port=9200)
 db.connect()
@@ -756,7 +756,7 @@ result = db.search("products", {
 #### 🔷 Neo4j (Graph Database)
 
 ```python
-from unifydb import Neo4j
+from onedb import Neo4j
 
 db = Neo4j(
     host="localhost",
@@ -816,7 +816,7 @@ result = db.execute("""
 
 ```python
 import asyncio
-from unifydb import AsyncPostgreSQL, AsyncMongoDB
+from onedb import AsyncPostgreSQL, AsyncMongoDB
 
 async def main():
     # PostgreSQL async
@@ -965,22 +965,22 @@ class Query:
 ### How to choose driver when multiple available?
 
 ```python
-from unifydb import PostgreSQL
+from onedb import PostgreSQL
 
 # psycopg2 is used by default
 db = PostgreSQL(host="localhost", database="mydb")
 
 # For async use asyncpg
-from unifydb import AsyncPostgreSQL
+from onedb import AsyncPostgreSQL
 db = AsyncPostgreSQL(host="localhost", database="mydb")
 ```
 
 ### How to handle errors?
 
 ```python
-from unifydb import Database
-from unifydb.exceptions import (
-    UnifyDBError,
+from onedb import Database
+from onedb.exceptions import (
+    OneDBError,
     ConnectionError,
     QueryError,
     DriverNotInstalledError
@@ -997,14 +997,14 @@ except QueryError as e:
     print(f"Query: {e.details['query']}")
 except DriverNotInstalledError as e:
     print(f"Install driver: {e.details['install_command']}")
-except UnifyDBError as e:
+except OneDBError as e:
     print(f"Database error: {e}")
 ```
 
 ### How to use connection pooling?
 
 ```python
-from unifydb import PostgreSQL
+from onedb import PostgreSQL
 
 db = PostgreSQL(
     host="localhost",
@@ -1019,7 +1019,7 @@ db = PostgreSQL(
 
 ### Is ORM supported?
 
-UnifyDB is **not an ORM**, but a universal database interface. For ORM functionality, use SQLAlchemy or Django ORM together with UnifyDB for specific tasks.
+OneDB is **not an ORM**, but a universal database interface. For ORM functionality, use SQLAlchemy or Django ORM together with OneDB for specific tasks.
 
 ### Security: SQL injections?
 
@@ -1042,12 +1042,12 @@ db.execute(f"SELECT * FROM users WHERE id = {user_id}")
 
 ```
 DriverNotInstalledError: Driver 'psycopg2' is not installed.
-Install with: pip install unifydb[postgresql]
+Install with: pip install onedb[postgresql]
 ```
 
 **Solution:** Install required driver:
 ```bash
-pip install unifydb[postgresql]
+pip install onedb[postgresql]
 ```
 
 ### Error: Connection refused
@@ -1084,8 +1084,8 @@ db = PostgreSQL(
 ### Development Setup
 
 ```bash
-git clone https://github.com/EndermanHack19/unifydb
-cd unifydb
+git clone https://github.com/EndermanHack19/onedb
+cd onedb
 pip install -e ".[dev]"
 pytest tests/
 ```
@@ -1096,6 +1096,6 @@ pytest tests/
 
 **Made with ❤️ for the Python community**
 
-[⬆ Back to Top](#-unifydb)
+[⬆ Back to Top](#-onedb)
 
 </div>
