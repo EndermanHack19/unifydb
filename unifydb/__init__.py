@@ -1,6 +1,6 @@
 """
 UnifyDB - One library to rule them all databases.
-Unified interface for 15+ database systems with optional web dashboard.
+Unified interface for 15+ database systems.
 
 Usage:
     from unifydb import Database
@@ -15,9 +15,9 @@ Usage:
 Install options:
     pip install unifydb                    # Core only
     pip install unifydb[postgresql]        # With PostgreSQL support
+    pip install unifydb[mysql]             # With MySQL support
+    pip install unifydb[mongodb]           # With MongoDB support
     pip install unifydb[all]               # All database drivers
-    pip install unifydb[web]               # Web dashboard panel
-    pip install unifydb[full]              # Everything
 """
 
 __version__ = "1.0.0"
@@ -36,9 +36,11 @@ from .exceptions import (
     QueryError,
     AdapterNotFoundError,
     DriverNotInstalledError,
+    ValidationError,
+    TransactionError,
 )
 
-# Optional: Connection pool (may not be needed for basic usage)
+# Optional: Connection pool
 try:
     from .core.connection import ConnectionPool
 except ImportError:
@@ -98,6 +100,8 @@ __all__ = [
     "QueryError",
     "AdapterNotFoundError",
     "DriverNotInstalledError",
+    "ValidationError",
+    "TransactionError",
     # Adapters (lazy loaded)
     "Oracle",
     "MySQL",
